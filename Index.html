@@ -1,0 +1,588 @@
+<html>
+<head>
+<!--  @2014 by gogreene.us - A Go Greene Venture  David Greene -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- iPhone needs this -->
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<!--Load the AJAX API-->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+
+<script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.debug.js"></script>
+
+<script src="js/descriptions.js"></script>
+<style>
+body {background-color:#BE6527;}
+a {color: #633100;}
+a:visited {color: #633100;}
+div.lpxcenterpageinner { position: relative; margin: 0 auto; text-align: left; width: 980px; }
+
+
+.btn-custom { background-color:  hsl(216, 70%, 42%) !important; background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#14547f", endColorstr="#0e3d5c"); background-image: -khtml-gradient(linear, left top, left bottom, from(#14547f), to(#0e3d5c)); background-image: -moz-linear-gradient(top, #14547f, #0e3d5c); background-image: -ms-linear-gradient(top, #14547f, #0e3d5c); background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #14547f), color-stop(100%, #0e3d5c)); background-image: -webkit-linear-gradient(top, #14547f, #0e3d5c); background-image: -o-linear-gradient(top, #14547f, #0e3d5c); background-image: linear-gradient(#14547f, #0e3d5c); border-color: #0e3d5c #0e3d5c hsl(204, 72%, 19%); color: #fff !important; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.13); -webkit-font-smoothing: antialiased; }
+
+</style>
+
+<script  type="text/javascript" >
+				
+var expenseCategories = [
+  {
+	"expenseSubCategories": [
+      {
+        "name": subCat2aDesc
+      },
+	  {
+        "name": subCat2bDesc
+      },
+	  {
+        "name": subCat2cDesc
+      },
+      {
+        "name": subCat2dDesc
+      },
+      {
+        "name": subCat2eDesc
+     } 
+    ], "name": categoryCode2Desc,
+	"categoryCode": 2
+	},
+  {    "expenseSubCategories": [
+      {
+        "name": subCat3aDesc
+      },
+      {
+        "name": subCat3bDesc
+      },
+	  {
+        "name": subCat3cDesc
+      },
+      {
+        "name": subCat3dDesc
+      }
+    ],
+    "name": categoryCode3Desc,
+	"categoryCode": 3
+  },	{
+    "expenseSubCategories": [
+      {
+        "name": subCat4aDesc
+      },
+      {
+        "name": subCat4bDesc
+      }
+    ],
+    "name": categoryCode4Desc,
+	"categoryCode": 4
+  },
+
+  {
+    "expenseSubCategories": [
+
+      {
+        "name": subCat5aDesc
+      },
+      {
+        "name": subCat5bDesc
+      },
+      {
+        "name": subCat5cDesc
+      },
+      {
+        "name": subCat5dDesc
+      },
+      {
+        "name": subCat5eDesc
+      },
+      {
+        "name": subCat5fDesc
+      }
+    ],
+    "name": categoryCode5Desc,
+	"categoryCode": 5
+  },
+  {
+    "expenseSubCategories": [
+	  {
+        "name": subCat6aDesc
+      },
+	  {
+        "name": subCat6bDesc
+      },
+	  {
+        "name": subCat6cDesc
+      },
+      {
+        "name": subCat6dDesc
+      },
+      {
+        "name": subCat6eDesc
+      },
+	  {
+        "name": subCat6fDesc
+      },
+	  {
+        "name": subCat6gDesc
+      },
+      {
+        "name": subCat6hDesc
+      }
+    ],
+    "name": categoryCode6Desc,
+	"categoryCode": 6
+  }
+];
+
+var expensePeriods = [
+	{
+	'expensePeriodName': weekDesc, 'expensePeriodValue': 52 
+	},{
+	'expensePeriodName': monthDesc, 'expensePeriodValue': 12 
+	},{
+	'expensePeriodName': yearDesc, 'expensePeriodValue': 1 
+	}
+];
+
+
+
+
+
+var hourlyPay = 0;
+var yearlyPayInThousands = 0;
+var totalExpenses = 0;
+var totalPay = 0;
+var takeHome = 0; fuelExpense = 0; leaseExpense = 0; maintenanceExpense = 0; insuranceExpense = 0; feeExpense = 0;
+var expenseCategoryChartData = [
+              [categoryDesc, countDesc],
+              [categoryCode1Desc, takeHome],
+			  [categoryCode2Desc, leaseExpense],
+              [categoryCode3Desc, maintenanceExpense],
+              [categoryCode4Desc, fuelExpense],
+			  [categoryCode5Desc, insuranceExpense],
+			  [categoryCode6Desc, feeExpense]
+            ];
+google.load("visualization", "1", { packages: ["corechart"] });
+google.setOnLoadCallback(drawCategoryChart);
+
+function drawCategoryChart() {
+	var pieData = google.visualization.arrayToDataTable(expenseCategoryChartData);
+	var pieOptions = {
+				backgroundColor: "#BE6527", //Note: set to match page css
+				// original chartArea: {left:"10%",top:"5%",  width:"70%",height:"25%"},  
+				chartArea: {left:"10%",top:"5%",  width:"70%",height:"40%"},  
+				legend: {position: 'left'},
+                slices: [ {color: '#168E10', offset: 0.2 },{color: '#C5161F'},{color: '#FFA500'},{color: '#499DDA'},{color: '#88108E'},{color: '#10558E'}] //Note: set to match page color scheme
+            };
+	var pieChart = new google.visualization.PieChart(document.getElementById('chartCategories'));
+	pieChart.draw(pieData, pieOptions);
+}
+
+// Load the Visualization API and the guage package.
+google.load('visualization', '1.0', {'packages':['gauge']});
+ 
+// Set a callback to run when the Google Visualization API is loaded.
+google.setOnLoadCallback(drawHourlyWageChart);
+ 
+// Callback that creates and populates a data table,
+// instantiates the pie chart, passes in the data and
+// draws it.
+function drawHourlyWageChart () {
+	if (hourlyPay > 0) {
+		hourlyPay = roundToTwo(hourlyPay);
+	}
+	
+    var data = google.visualization.arrayToDataTable([
+        ['Label', 'Value'],
+        [hourDesc, hourlyPay]
+    ]);
+
+    var options = {
+		max: 32,
+        redFrom: 0,
+        redTo: 8,
+        yellowFrom:8,
+        yellowTo: 25,
+        greenFrom: 25,
+        greenTo: 32,
+		minorTicks: 4,
+        majorTicks: ["0","8","16","24","32"]
+    };
+
+	var chart = new google.visualization.Gauge(document.getElementById('chartHourlyWage'));
+	chart.draw(data, options);
+}
+
+google.setOnLoadCallback(drawYearlyTakeHomeChart);
+ 
+// Callback that creates and populates a data table,
+// instantiates the pie chart, passes in the data and
+// draws it.
+function drawYearlyTakeHomeChart () {
+    var data = google.visualization.arrayToDataTable([
+        ['Label', 'Value'],
+        [yearDesc, yearlyPayInThousands]
+    ]);
+
+var options = {
+		max: 80,
+        redFrom: 0,
+        redTo: 17,
+        yellowFrom:17,
+        yellowTo: 52,
+        greenFrom: 52,
+        greenTo: 80,
+		minorTicks: 10,
+        majorTicks: ["0","20","40","60","80"]
+    };
+
+    var chart = new google.visualization.Gauge(document.getElementById('chartYearlyTakeHome'));
+    chart.draw(data, options);
+}
+
+</script>
+</head>
+ 
+<body>
+<div class='liveExample'> 
+<div class="container">
+
+<div class="row">
+<table width='100%'>
+	<td width='60%' >
+	<form role="form">
+    <fieldset>
+		<table width='100%'>
+		<thead>
+		<tr><div class="col-md-6"><th ><h3 id=weeklyPay></h3></th></div></tr>
+        <tr>
+				<div class="col-md-1"><th class='quantity' id=hoursWorked ></th></div>                
+                <div class="col-md-1"><th class='price' id=paid ></th></div>
+				<div class="col-md-1"><th class='price text-right' id=perHour ></th></div>
+            </tr>
+		
+        </thead>
+		<tbody>
+            <tr>
+            	<div class="col-md-1"><td class='quantity' ><input  data-bind="value: hoursWorked" class="form-control"  /></td></div>
+				<div class="col-md-1"><td class='price' ><input  data-bind="value: amountPaid" class="form-control" /></td></div>                
+				<div class="col-md-1"><td class='price text-right'  ><label  data-bind="text: formatCurrency(grossPerHour())"  ></label></td></div>
+            </tr>
+		</tbody>
+		</table>
+		<br/><strong ></strong>
+		
+
+	</td>
+	<div class="col-md-12 col-sm-12 col-xs-12">
+    <td width='40%'>
+
+		<table width='100%'>
+        <thead>
+		<tr><div class="col-md-6 col-sm-6 col-xs-12"><th ><h3 class='text-right' id="summary" ></h3></th></div></tr>
+		    <tr>
+                <th ></th>
+                <th class='text-right' id=gross ></th>                
+                <th class='text-right' id=net ></th>
+            </tr>
+        </thead>
+		<tbody>
+            <tr>
+                <td class='text-right' id=week ></td>
+                <td class='price text-right' ><label data-bind="text: formatCurrency(grossThisPeriod())"  ></label></td>
+				<td class='price text-right' ><label data-bind="text: formatCurrency(netPerPeriod())"  ></label></td>                 
+            </tr>
+            <tr>
+                <td class='text-right' id=year ></td>
+                <td class='price text-right'  ><label data-bind="text: formatCurrency(grossPerYear())" ></label></td>
+				<td class='price text-right' ><label  data-bind="text: formatCurrency(netPerYear())" ></label></td>                 
+            </tr>
+            <tr>
+                <td class='text-right' id=perHour2 ></td>
+                <td class='price text-right'   ><label data-bind="text: formatCurrency(grossPerHour())"></label></td>
+				<td class='price text-right'><label  data-bind="text: formatCurrency(netPerHour())"></label></td>                 
+            </tr>
+		</tbody>
+		</table>
+	</td>
+	</div>
+<tr>
+		<table width='100%'>
+        <thead>
+		<tr><div class="col-md-6"><th ><h3 id=expenses></h3></th></div></tr>
+            <tr>
+                <div class="col-md-1"><th id=category></th></div>
+                <div class="col-md-1"><th id=item></th></div>                
+                <div class="col-md-1"><th class='price' id=cost></th></div>
+				<div class="col-md-1"><th id=period></th></div> 
+				<div class="col-md-1"><th class='price text-right' id=week2></th></div> 
+				<div class="col-md-1"><th ></th></div>
+            </tr>
+        </thead>
+		<tbody  data-bind='foreach: expenseItemLines' >
+            <tr>
+                <td  ><select data-bind="options: expenseCategories, optionsText: 'name', optionsCaption: 'Select...', value: expenseCategory" > </select></td>
+                <td data-bind="with: expenseCategory">
+                    <select data-bind="options: expenseSubCategories, optionsText: 'name', optionsCaption: 'Select...', value: $parent.expenseSubCategory "> </select></td>
+				<td class='price' ><input  data-bind="value: expenseAmount" class="form-control" /></td>                 
+                <td ><select  data-bind="options: expensePeriods, optionsText: 'expensePeriodName', value: expensePeriod" ></select></td>
+		<div class="col-md-1"><td  class='price	text-right' data-bind="text: formatCurrency(expenseSubtotal())" ></td></div> 
+                <td class='text-right' ><a href='#' data-bind='click: removeExpenseLine' id=remove></a></td>
+            </tr>
+		</tbody>
+		</table>
+	</td>
+</tr>
+<tr>
+
+<td  > <div class='text-right'>
+<button class='btn-custom btn' data-bind='click: addExpenseLine' id=addExpense></button><br/>
+</td>
+</div>
+</tr>
+<tr>
+<td>
+		<table width='30%'>
+		<tbody>
+            <tr  >
+    <h4 class='grandTotal text-right' ><span id=weeklyExpenses ></span>
+        <span  data-bind='text: formatCurrency(grandTotal())'></span>
+    </h4><br/>
+            </tr>
+		</tbody>
+		</table>
+
+</td>
+</tr>
+	</table>
+
+		
+    </fieldset>
+	</form>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-3"><div id="chartYearlyTakeHome" style="width:100%; height:50%" ></div></div>
+        <div class="col-xs-12 col-md-6"><div id="chartCategories" class="chartCategories"  style="width:100%; height:100%"  ></div></div>
+        <div class="col-xs-12 col-md-3"><div id="chartHourlyWage" class="chartHourlyWage"  style="width:100%; height:50%"  ></div></div>
+    </div>
+</div>
+</div>
+<script  type="text/javascript" >
+
+$(document).ready(function(){
+	$("#summary").html(summaryDesc);
+	$("#hoursWorked").html(hoursWorkedDesc);
+	$("#paid").html(paidDesc);
+	$("#perHour").html(perHourDesc);
+	$("#gross").html(grossDesc);
+	$("#net").html(netDesc);
+	$("#week").html(weekDesc);
+	$("#year").html(yearDesc);
+	$("#perHour2").html(perHourDesc);
+	$("#net").html(netDesc);
+	$("#category").html(categoryDesc);
+	$("#item").html(itemDesc);          
+	$("#cost").html(costDesc);
+	$("#period").html(periodDesc);
+	$("#week2").html(weekDesc);
+	$("#weeklyPay").html(weeklyPayDesc);	
+	$("#remove").html(removeDesc);
+	$("#addExpense").html(addExpenseDesc);
+	$("#expenses").html(expensesDesc);
+	$("#weeklyExpenses").html(weeklyExpensesDesc);
+}); 
+
+function AppViewModel(data) {
+	this.hoursWorked = ko.observable();
+	this.amountPaid = ko.observable();
+	this.grossPerHour = ko.computed(function() {
+		if (this.hoursWorked() > 0 && this.amountPaid() > 0) {
+			var amount = (this.grossPerPeriod() / this.hoursWorked());
+			return amount;    
+		}
+		else {
+			return 0;
+		}
+	}, this
+	);
+	this.grossPerPeriod = ko.computed(function() {
+		if (this.amountPaid() > 0)
+		{
+			var periodAmount = this.amountPaid();    
+			return periodAmount;    
+		}
+		else
+		{
+			return 0;
+		}
+    }, this);
+	this.grossThisPeriod = ko.computed(function() {
+		if (this.amountPaid() > 0)
+		{
+			var periodAmount = +this.amountPaid();    
+			return periodAmount;
+		}
+		else
+		{
+			return 0;
+		}
+    }, this);
+	this.grossPerYear = ko.computed(function() {
+		if (this.amountPaid() > 0)
+		{
+			var periodAmount = this.amountPaid();
+			return (periodAmount * 52) ;    
+		}
+		else
+		{
+			return 0;
+		}
+    }, this);
+
+    self.expenseItemLines = ko.observableArray([new expenseItemLine()]); // Put one line in by default
+
+    self.grandTotal = ko.computed(function() {
+		resetExpenseCategoryTotals();
+        var total = 0;
+		//var rowCounter = 0;
+        $.each(self.expenseItemLines(), function() { 
+			if (this.expenseCategory() != null)
+			{
+				//rowCounter++;
+				var selectedCategory = this.expenseCategory().categoryCode;
+				var expenseAmountThisPeriod = this.expenseSubtotal();
+				if (expenseAmountThisPeriod > 0) {
+					updateExpenseCategoryTotal(selectedCategory, expenseAmountThisPeriod);
+				}
+			}
+			total += this.expenseSubtotal() 
+		})
+		redrawCharts();
+        return total;
+    });
+
+
+
+	this.netPerHour = ko.computed(function() {
+		if (this.hoursWorked() > 0 && this.amountPaid() > 0)
+		{
+			var amount = (this.netPerPeriod() / this.hoursWorked());
+			hourlyPay = amount;
+			redrawCharts();
+			return amount;    
+		}
+		else
+		{
+			return 0;
+		}
+    }, this);
+	this.netPerPeriod = ko.computed(function() {
+		if (this.amountPaid() > 0)
+		{
+			var netPeriod = (this.amountPaid() - self.grandTotal());
+			resetTakeHomeCategoryTotal();
+			updateExpenseCategoryTotal(1, netPeriod);
+			return netPeriod;    
+		}
+		else
+		{
+			return 0;
+		}
+    }, this);
+	this.netPerYear = ko.computed(function() {
+		if (this.amountPaid() > 0)
+		{
+			var amount = (this.amountPaid() - self.grandTotal()) * 52;
+			yearlyPayInThousands = roundToTwo(amount/1000);
+			redrawCharts();
+			return (this.amountPaid() - self.grandTotal()) * 52;    
+		}
+		else
+		{
+			return 0;
+		}
+    }, this);
+	
+ 
+    // Operations
+    self.addExpenseLine = function() { 
+		self.expenseItemLines.push(new expenseItemLine()); 
+	};
+    self.removeExpenseLine = function(line) { 
+		self.expenseItemLines.remove(line); 
+	};
+}
+
+var expenseItemLine = function() {
+    var self = this;
+    self.expenseCategory = ko.observable();
+    self.expenseSubCategory = ko.observable();
+    self.expenseAmount = ko.observable();
+	self.expensePeriod = ko.observable();
+    self.expenseSubtotal = ko.computed(function() {
+			var rawAmount = self.expenseAmount();
+			if (self.expensePeriod() != null) {
+				var periodCoefficient = self.expensePeriod().expensePeriodValue;
+				if (rawAmount > 0) {
+					var computedAmount = computeWeeklyExpense(rawAmount, periodCoefficient);
+					return computedAmount;
+				}
+			}
+        return  0;
+    });
+ 
+    // Whenever the expenseCategory changes, reset the expenseSubCategory selection
+    self.expenseCategory.subscribe(function() {
+        self.expenseSubCategory(undefined);
+    });
+};
+
+// Activates knockout.js
+ko.applyBindings(new AppViewModel());
+
+function resetExpenseCategoryTotals() {
+    for (i=2;  i < 7 ; i++ ) {
+		expenseCategoryChartData[i][1] = 0;
+	}
+}
+
+function resetTakeHomeCategoryTotal() {
+    expenseCategoryChartData[1][1] = 0;
+}
+
+function updateExpenseCategoryTotal(expenseCategory, expenseValue) {
+	expenseCategoryChartData[expenseCategory][1] += roundToTwo(expenseValue);
+}
+
+function computeWeeklyExpense(expenseAmount, timePeriodMuliplier) {
+	return (expenseAmount * timePeriodMuliplier)/52;
+}
+function roundToTwo(num) {    
+    return +(Math.round(num + "e+2")  + "e-2");
+}
+
+function formatCurrency(value) {
+    return "$" + value.toFixed(2);
+}
+
+function redrawCharts() {
+	drawCategoryChart();   
+	drawHourlyWageChart();
+	drawYearlyTakeHomeChart();
+}
+
+$(window).resize(function(){
+        redrawCharts();
+});
+
+
+</script>
+</body>
+</html>
+
