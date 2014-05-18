@@ -22,13 +22,13 @@
 <style>
 .price
 {
-	max-width:50px;
+	min-width:25px;
 } 
-
+ 
 .quantity 
 {
-	max-width:5px;
-} 
+	min-width:15px;
+}
 body {background-color:#BE6527;}
 a {color: #633100;}
 a:visited {color: #633100;}
@@ -271,9 +271,9 @@ var options = {
     <fieldset>
 		<table width='100%' border="1">
 		<thead>
-		<tr><div class="col-md-6"><th ><h3>Weekly Pay</h3></th></div></tr>
+		<tr><div class="col-md-6"><caption class='text-left' ><h3>Weekly Pay</h3></caption></div></tr>
         <tr>
-				<div class="col-md-1"><th class='quantity' >Hours Worked</th></div>                
+				<div class="col-md-1"><th class='quantity' >Hours</th></div>                
                 <div class="col-md-1"><th class='price' >Paid</th></div>
 				<div class="col-md-1"><th class='price text-right'  >Per Hour</th></div>
             </tr>
@@ -281,7 +281,7 @@ var options = {
         </thead>
 		<tbody>
             <tr>
-            	<div class="col-md-1"><td class='quantity'  ><input  data-bind="value: hoursWorked" class="form-control"  /></td></div>
+            	<div class="col-md-1"><td class='quantity' ><input  data-bind="value: hoursWorked" class="form-control"  /></td></div>
 				<div class="col-md-1"><td class='price' ><input  data-bind="value: amountPaid" class="form-control" /></td></div>                
 				<div class="col-md-1"><td class='price text-right'  ><label  data-bind="text: formatCurrency(grossPerHour())"  ></label></td></div>
             </tr>
