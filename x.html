@@ -262,7 +262,7 @@ var options = {
 	
 
 <div class='liveExample'> 
-<div class="container" style="margin-left:5px; margin-right:5px;" >
+<div class="container"  >
 
 <div class="row">
 <table width='100%'>
@@ -291,57 +291,7 @@ var options = {
 		
 
 	</td>
-
-<tr>
-		<table width='100%' border="1">
-        <thead>
-		<tr><div class="col-md-6"><th ><h3>Expenses</h3></th></div></tr>
-            <tr>
-                <div class="col-md-1"><th >Category</th></div>
-                <div class="col-md-1"><th >Item</th></div>                
-                <div class="col-md-1"><th class='price' >Cost</th></div>
-				<div class="col-md-1"><th >Period</th></div> 
-				<div class="col-md-1"><th class='price text-right' >Week</th></div> 
-				<div class="col-md-1"><th ></th></div>
-            </tr>
-        </thead>
-		<tbody  data-bind='foreach: expenseItemLines' >
-            <tr>
-                <td  ><select data-bind="options: expenseCategories, optionsText: 'name', optionsCaption: 'Select...', value: expenseCategory" > </select></td>
-                <td data-bind="with: expenseCategory">
-                    <select data-bind="options: expenseSubCategories, optionsText: 'name', optionsCaption: 'Select...', value: $parent.expenseSubCategory "> </select></td>
-				<td class='price' ><input  data-bind="value: expenseAmount" class="form-control" max-width="2px"/></td>                 
-                <td ><select  data-bind="options: expensePeriods, optionsText: 'expensePeriodName', value: expensePeriod" ></select></td>
-		<div class="col-md-1"><td  class='price	text-right' data-bind="text: formatCurrency(expenseSubtotal())" ></td></div> 
-                <td class='text-right' ><a href='#' data-bind='click: removeExpenseLine'>Remove</a></td>
-            </tr>
-		</tbody>
-		</table>
-		
-	</td>
-</tr>
-<tr>
-
-<td  > <div class='text-right'>
-<button class='btn-custom btn' data-bind='click: addExpenseLine' >Add Expense</button><br/>
-</td>
-</div>
-</tr>
-<tr>
-<td>
-		<table width='30%' border="1">
-		<tbody>
-            <tr>
-    <h4 class='grandTotal text-right' >
-        Weekly Expenses: <span data-bind='text: formatCurrency(grandTotal())'></span>
-    </h4><br/>
-            </tr>
-		</tbody>
-		</table>
-
-</td>
-</tr>
-<div class="col-md-6 ">
+	<div class="col-md-6 ">
     <tr width='40%'>
 
 		<table width='100%' border="1">
@@ -373,7 +323,62 @@ var options = {
 		</table>
 	</tr>
 	</div>
+<tr>
+<tr><div class="col-md-6 col-sm-6 col-xs-12"><th ><h3 class='text-left' >Summary</h3></th></div></tr>
+		<table width='100%' border="1">
+        <thead>
+			
+           <!-- <tr>
+                <div class="col-md-1"><th >Category</th></div>
+                <div class="col-md-1"><th >Item</th></div>                
+                <div class="col-md-1"><th class='price' >Cost</th></div>
+				<div class="col-md-1"><th >Period</th></div> 
+				<div class="col-md-1"><th class='price text-right' >Week</th></div> 
+				<div class="col-md-1"><th ></th></div>
+            </tr> -->
+        </thead>
+		<tbody  data-bind='foreach: expenseItemLines' >
+            <tr>
+				<section>
+                <td  ><div style="float:left;margin-right:20px;">
+					<label for="Category">Category</label>
+					<select data-bind="options: expenseCategories, optionsText: 'name', optionsCaption: 'Select...', value: expenseCategory"  id="category"> </select>
+					</div>
+				</td>
+                <td data-bind="with: expenseCategory"><div style="float:left;margin-right:20px;">
+                    <label for="item">Item</label><select data-bind="options: expenseSubCategories, optionsText: 'name', optionsCaption: 'Select...', value: $parent.expenseSubCategory "  id="item"> </select></div></td>
+				<td class='price' ><label for="cost">Cost</label><input  data-bind="value: expenseAmount" class="form-control" id="cost"/></td>                 
+                <td ><label for="period">Period</label><select  data-bind="options: expensePeriods, optionsText: 'expensePeriodName', value: expensePeriod" id="period"></select></td>
+		<div class="col-md-1"><td  class='price	text-right' data-bind="text: formatCurrency(expenseSubtotal())" ></td></div> 
+                <td class='text-right' ><a href='#' data-bind='click: removeExpenseLine'>Remove</a></td>
+				</section>
+            </tr>
+		</tbody>
+		</table>
+		
+	</td>
+</tr>
+<tr>
 
+<td  > <div class='text-right'>
+<button class='btn-custom btn' data-bind='click: addExpenseLine' >Add Expense</button><br/>
+</td>
+</div>
+</tr>
+<tr>
+<td>
+		<table width='30%' border="1">
+		<tbody>
+            <tr>
+    <h4 class='grandTotal text-right' >
+        Weekly Expenses: <span data-bind='text: formatCurrency(grandTotal())'></span>
+    </h4><br/>
+            </tr>
+		</tbody>
+		</table>
+
+</td>
+</tr>
 	</table>
 
 		
@@ -381,7 +386,7 @@ var options = {
 	</form>
     </div>
     <div class="row">
-        <div class="col-xs-12 col-md-3" ><div id="chartYearlyTakeHome" style="width:100%; height:50%" ></div></div>
+        <div class="col-xs-12 col-md-3"><div id="chartYearlyTakeHome" style="width:100%; height:50%" ></div></div>
         <div class="col-xs-12 col-md-6"><div id="chartCategories" class="chartCategories"  style="width:100%; height:100%"  ></div></div>
         <div class="col-xs-12 col-md-3"><div id="chartHourlyWage" class="chartHourlyWage"  style="width:100%; height:50%"  ></div></div>
     </div>
@@ -481,7 +486,6 @@ function AppViewModel(data) {
 			var netPeriod = (this.amountPaid() - self.grandTotal());
 			resetTakeHomeCategoryTotal();
 			updateExpenseCategoryTotal(1, netPeriod);
-			redrawCharts();
 			return netPeriod;    
 		}
 		else

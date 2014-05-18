@@ -20,15 +20,6 @@
 <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.debug.js"></script>
 
 <style>
-.price
-{
-	max-width:50px;
-} 
-
-.quantity 
-{
-	max-width:5px;
-} 
 body {background-color:#BE6527;}
 a {color: #633100;}
 a:visited {color: #633100;}
@@ -46,21 +37,21 @@ var expenseCategories = [
   {
 	"expenseSubCategories": [
       {
-        "name": "Truck"
+        "name": "Camión" // Truck
       },
 	  {
-        "name": "Yard Space"
+        "name": "Depósito" // Yard Space Depósito
       },
 	  {
-        "name": "Parking"
+        "name": "Estacionamiento" //  Parking
       },
       {
         "name": "Radio"
       },
       {
-        "name": "Other"
+        "name": "Otro" // Other
      } 
-    ], "name": "Lease and Rent",
+    ], "name": "Arrendamiento y Renta", // Lease and Rent
 	"categoryCode": 2
 	},
   {    "expenseSubCategories": [
@@ -68,16 +59,16 @@ var expenseCategories = [
         "name": "Regular"
       },
       {
-        "name": "Repairs"
+        "name": "Reparar" // Repairs 
       },
 	  {
-        "name": "Truck Wash"
+        "name": "Lavado de Camiones"  // Truck Wash
       },
       {
-        "name": "Other"
+        "name": "Otro"
       }
     ],
-    "name": "Maintenance",
+    "name": "Mantenimiento", //Maintenance
 	"categoryCode": 3
   },	{
     "expenseSubCategories": [
@@ -85,10 +76,10 @@ var expenseCategories = [
         "name": "Diesel"
       },
       {
-        "name": "Other"
+        "name": "Otro"
       }
     ],
-    "name": "Fuel",
+    "name": "Combustible",
 	"categoryCode": 4
   },
 
@@ -96,13 +87,13 @@ var expenseCategories = [
     "expenseSubCategories": [
 
       {
-        "name": "Truck"
+        "name": "Camión"
       },
       {
-        "name": "Liability"
+        "name": "Responsabilidad" //Liability 
       },
       {
-        "name": "Cargo"
+        "name": "Cargo"  //  
       },
       {
         "name": "Occ"
@@ -111,10 +102,10 @@ var expenseCategories = [
         "name": "PD"
       },
       {
-        "name": "Other"
+        "name": "Otro"
       }
     ],
-    "name": "Insurance",
+    "name": "Aseguranza", // Insurance
 	"categoryCode": 5
   },
   {
@@ -123,39 +114,39 @@ var expenseCategories = [
         "name": "DMV"
       },
 	  {
-        "name": "Registration"
+        "name": "Registro" //Registration 
       },
 	  {
-        "name": "License"
+        "name": "Licencia" // License 
       },
       {
-        "name": "Permits"
+        "name": "Permiso"  // Permits 
       },
       {
-        "name": "Taxes"
+        "name": "Impuesto" // Taxes  
       },
 	  {
         "name": "DTR"
       },
 	  {
-        "name": "Fines"
+        "name": "Multa" // Fines 
       },
       {
-        "name": "Other"
+        "name": "Otro"
       }
     ],
-    "name": "Fees",
+    "name": "Recargos", // Fees
 	"categoryCode": 6
   }
 ];
 
 var expensePeriods = [
 	{
-	'expensePeriodName': 'Week', 'expensePeriodValue': 52 
+	'expensePeriodName': 'Semana', 'expensePeriodValue': 52 //Week
 	},{
-	'expensePeriodName':'Month', 'expensePeriodValue': 12 
+	'expensePeriodName':'Mes', 'expensePeriodValue': 12 //Month
 	},{
-	'expensePeriodName':'Year', 'expensePeriodValue': 1 
+	'expensePeriodName':'Año', 'expensePeriodValue': 1 //Year
 	}
 ];
 
@@ -169,13 +160,13 @@ var totalExpenses = 0;
 var totalPay = 0;
 var takeHome = 0; fuelExpense = 0; leaseExpense = 0; maintenanceExpense = 0; insuranceExpense = 0; feeExpense = 0;
 var expenseCategoryChartData = [
-              ['Category', 'Count'],
-              ['Take Home', takeHome],
-			  ['Lease and Rent', leaseExpense],
-              ['Maintenance', maintenanceExpense],
-              ['Fuel', fuelExpense],
-			  ['Insurance', insuranceExpense],
-			  ['Fees and Fines', feeExpense]
+              ['Categoría', 'Cuenta'], // Category , Count
+              ['Salario Neto', takeHome], // Take Home
+			  ['Arrendamiento y Renta', leaseExpense], // Lease and Rent
+              ['Mantenimiento', maintenanceExpense], // Maintenance
+              ['Combustible', fuelExpense], // Fuel
+			  ['Aseguranza', insuranceExpense], // Insurance
+			  ['Recargos', feeExpense] // Fees and Fines
             ];
 google.load("visualization", "1", { packages: ["corechart"] });
 google.setOnLoadCallback(drawCategoryChart);
@@ -209,7 +200,7 @@ function drawHourlyWageChart () {
 	
     var data = google.visualization.arrayToDataTable([
         ['Label', 'Value'],
-        ['Hour', hourlyPay]
+        ['Hora', hourlyPay] // Hour
     ]);
 
     var options = {
@@ -236,7 +227,7 @@ google.setOnLoadCallback(drawYearlyTakeHomeChart);
 function drawYearlyTakeHomeChart () {
     var data = google.visualization.arrayToDataTable([
         ['Label', 'Value'],
-        ['Year', yearlyPayInThousands]
+        ['Año', yearlyPayInThousands] //Year
     ]);
 
 var options = {
@@ -259,29 +250,27 @@ var options = {
 </head>
  
 <body>
-	
-
 <div class='liveExample'> 
-<div class="container" style="margin-left:5px; margin-right:5px;" >
+<div class="container">
 
 <div class="row">
 <table width='100%'>
 	<td width='60%' >
 	<form role="form">
     <fieldset>
-		<table width='100%' border="1">
+		<table width='100%'>
 		<thead>
-		<tr><div class="col-md-6"><th ><h3>Weekly Pay</h3></th></div></tr>
+		<tr><div class="col-md-6"><th ><h3>Paga Semanal</h3></th></div></tr>
         <tr>
-				<div class="col-md-1"><th class='quantity' >Hours Worked</th></div>                
-                <div class="col-md-1"><th class='price' >Paid</th></div>
-				<div class="col-md-1"><th class='price text-right'  >Per Hour</th></div>
+				<div class="col-md-1"><th class='quantity' >Horas Trabajadas</th></div>                
+                <div class="col-md-1"><th class='price' >Pagadas</th></div>
+				<div class="col-md-1"><th class='price text-right'  >Por Hora</th></div>
             </tr>
 		
         </thead>
 		<tbody>
             <tr>
-            	<div class="col-md-1"><td class='quantity'  ><input  data-bind="value: hoursWorked" class="form-control"  /></td></div>
+            	<div class="col-md-1"><td class='quantity' ><input  data-bind="value: hoursWorked" class="form-control"  /></td></div>
 				<div class="col-md-1"><td class='price' ><input  data-bind="value: amountPaid" class="form-control" /></td></div>                
 				<div class="col-md-1"><td class='price text-right'  ><label  data-bind="text: formatCurrency(grossPerHour())"  ></label></td></div>
             </tr>
@@ -291,49 +280,79 @@ var options = {
 		
 
 	</td>
+	<div class="col-md-12 col-sm-12 col-xs-12">
+    <td width='40%'>
 
-<tr>
-		<table width='100%' border="1">
+		<table width='100%'>
         <thead>
-		<tr><div class="col-md-6"><th ><h3>Expenses</h3></th></div></tr>
+		<tr><div class="col-md-6 col-sm-6 col-xs-12"><th ><h3 class='text-right' >Resumen</h3></th></div></tr>
+		    <tr>
+                <th ></th>
+                <th class='text-right' >Bruto</th>                
+                <th class='text-right' >Neto</th>
+            </tr>
+        </thead>
+		<tbody>
             <tr>
-                <div class="col-md-1"><th >Category</th></div>
-                <div class="col-md-1"><th >Item</th></div>                
-                <div class="col-md-1"><th class='price' >Cost</th></div>
-				<div class="col-md-1"><th >Period</th></div> 
-				<div class="col-md-1"><th class='price text-right' >Week</th></div> 
+                <td class='text-right' >Semana</td>
+                <td class='price text-right' ><label data-bind="text: formatCurrency(grossThisPeriod())"  ></label></td>
+				<td class='price text-right' ><label data-bind="text: formatCurrency(netPerPeriod())"  ></label></td>                 
+            </tr>
+            <tr>
+                <td class='text-right' >Año</td>
+                <td class='price text-right'  ><label data-bind="text: formatCurrency(grossPerYear())" ></label></td>
+				<td class='price text-right' ><label  data-bind="text: formatCurrency(netPerYear())" ></label></td>                 
+            </tr>
+            <tr>
+                <td class='text-right' >Por Hora</td>
+                <td class='price text-right'   ><label data-bind="text: formatCurrency(grossPerHour())"></label></td>
+				<td class='price text-right'><label  data-bind="text: formatCurrency(netPerHour())"></label></td>                 
+            </tr>
+		</tbody>
+		</table>
+	</td>
+	</div>
+<tr>
+		<table width='100%'>
+        <thead>
+		<tr><div class="col-md-6"><th ><h3>Gastos</h3></th></div></tr>
+            <tr>
+                <div class="col-md-1"><th >Categoría</th></div>
+                <div class="col-md-1"><th >Articulo</th></div>                
+                <div class="col-md-1"><th class='price' >Costo</th></div>
+				<div class="col-md-1"><th >Periodo</th></div> 
+				<div class="col-md-1"><th class='price text-right' >Semana</th></div> 
 				<div class="col-md-1"><th ></th></div>
             </tr>
         </thead>
 		<tbody  data-bind='foreach: expenseItemLines' >
             <tr>
-                <td  ><select data-bind="options: expenseCategories, optionsText: 'name', optionsCaption: 'Select...', value: expenseCategory" > </select></td>
+                <td  ><select data-bind="options: expenseCategories, optionsText: 'name', optionsCaption: 'Seleccione...', value: expenseCategory" > </select></td>
                 <td data-bind="with: expenseCategory">
-                    <select data-bind="options: expenseSubCategories, optionsText: 'name', optionsCaption: 'Select...', value: $parent.expenseSubCategory "> </select></td>
-				<td class='price' ><input  data-bind="value: expenseAmount" class="form-control" max-width="2px"/></td>                 
+                    <select data-bind="options: expenseSubCategories, optionsText: 'name', optionsCaption: 'Seleccione...', value: $parent.expenseSubCategory "> </select></td>
+				<td class='price' ><input  data-bind="value: expenseAmount" class="form-control" /></td>                 
                 <td ><select  data-bind="options: expensePeriods, optionsText: 'expensePeriodName', value: expensePeriod" ></select></td>
 		<div class="col-md-1"><td  class='price	text-right' data-bind="text: formatCurrency(expenseSubtotal())" ></td></div> 
-                <td class='text-right' ><a href='#' data-bind='click: removeExpenseLine'>Remove</a></td>
+                <td class='text-right' ><a href='#' data-bind='click: removeExpenseLine'>Eliminar</a></td>
             </tr>
 		</tbody>
 		</table>
-		
 	</td>
 </tr>
 <tr>
 
 <td  > <div class='text-right'>
-<button class='btn-custom btn' data-bind='click: addExpenseLine' >Add Expense</button><br/>
+<button class='btn-custom btn' data-bind='click: addExpenseLine' >Agregue un Gasto</button><br/>
 </td>
 </div>
 </tr>
 <tr>
 <td>
-		<table width='30%' border="1">
+		<table width='30%'>
 		<tbody>
             <tr>
     <h4 class='grandTotal text-right' >
-        Weekly Expenses: <span data-bind='text: formatCurrency(grandTotal())'></span>
+        Gastos Semanales: <span data-bind='text: formatCurrency(grandTotal())'></span>
     </h4><br/>
             </tr>
 		</tbody>
@@ -341,39 +360,6 @@ var options = {
 
 </td>
 </tr>
-<div class="col-md-6 ">
-    <tr width='40%'>
-
-		<table width='100%' border="1">
-        <thead>
-		<tr><div class="col-md-6 col-sm-6 col-xs-12"><th ><h3 class='text-left' >Summary</h3></th></div></tr>
-		    <tr>
-                <th ></th>
-                <th class='text-right' >Gross</th>                
-                <th class='text-right' >Net</th>
-            </tr>
-        </thead>
-		<tbody>
-            <tr>
-                <td class='text-right' >Week</td>
-                <td class='price text-right' ><label data-bind="text: formatCurrency(grossThisPeriod())"  ></label></td>
-				<td class='price text-right' ><label data-bind="text: formatCurrency(netPerPeriod())"  ></label></td>                 
-            </tr>
-            <tr>
-                <td class='text-right' >Year</td>
-                <td class='price text-right'  ><label data-bind="text: formatCurrency(grossPerYear())" ></label></td>
-				<td class='price text-right' ><label  data-bind="text: formatCurrency(netPerYear())" ></label></td>                 
-            </tr>
-            <tr>
-                <td class='text-right' >Per Hour</td>
-                <td class='price text-right'   ><label data-bind="text: formatCurrency(grossPerHour())"></label></td>
-				<td class='price text-right'><label  data-bind="text: formatCurrency(netPerHour())"></label></td>                 
-            </tr>
-		</tbody>
-		</table>
-	</tr>
-	</div>
-
 	</table>
 
 		
@@ -381,7 +367,7 @@ var options = {
 	</form>
     </div>
     <div class="row">
-        <div class="col-xs-12 col-md-3" ><div id="chartYearlyTakeHome" style="width:100%; height:50%" ></div></div>
+	    <div class="col-xs-12 col-md-3"><div id="chartYearlyTakeHome" style="width:100%; height:50%" ></div></div>
         <div class="col-xs-12 col-md-6"><div id="chartCategories" class="chartCategories"  style="width:100%; height:100%"  ></div></div>
         <div class="col-xs-12 col-md-3"><div id="chartHourlyWage" class="chartHourlyWage"  style="width:100%; height:50%"  ></div></div>
     </div>
@@ -481,7 +467,6 @@ function AppViewModel(data) {
 			var netPeriod = (this.amountPaid() - self.grandTotal());
 			resetTakeHomeCategoryTotal();
 			updateExpenseCategoryTotal(1, netPeriod);
-			redrawCharts();
 			return netPeriod;    
 		}
 		else
