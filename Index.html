@@ -29,6 +29,11 @@
                 vertical-align: bottom;
                 float: none;
             }
+            .vtop {
+                display: inline-block;
+                vertical-align: top;
+                float: none;
+            }
             body {
                 background-color:#BE6527;
             }
@@ -74,7 +79,7 @@
                 }, {
                     "name": "Other"
                 }],
-                "name": "Lease and Rent",
+                "name": "Lease & Rent",
                     "categoryCode": 2
             }, {
                 "expenseSubCategories": [{
@@ -166,7 +171,7 @@
             var expenseCategoryChartData = [
                 ['Category', 'Count'],
                 ['Take Home', takeHome],
-                ['Lease and Rent', leaseExpense],
+                ['Lease & Rent', leaseExpense],
                 ['Maintenance', maintenanceExpense],
                 ['Fuel', fuelExpense],
                 ['Insurance', insuranceExpense],
@@ -279,11 +284,11 @@
     <body>
         <div class='liveExample'>
             <div class="container" style="margin-left:5px; margin-right:5px;">
-                <div class="row">
-                    <table width='100%'>
-                        <td width='60%'>
-                            <form role="form">
-                                <fieldset>
+				<div class="row">
+					<form role="form">
+                        <fieldset>
+							<table width='100%'>
+								<tr width='60%'>
                                     <table width='100%' border="1">
                                         <thead>
                                             <tr>
@@ -325,126 +330,111 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <br/><strong></strong>
-
-                        </td>
-                        <tr>
-                            <table width='100%' border="1">
-                                <thead>
-                                    <tr>
-                                        <div class="col-md-6">
-                                            <caption class='text-left'>
-                                                <h3>Expenses</h3>
-                                            </caption>
-                                        </div>
-                                    </tr>
-                                    <tr>
-                                        <div class="col-md-1">
-                                            <th>Category</th>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <th>Week</th>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <th></th>
-                                        </div>
-                                    </tr>
-                                </thead>
-                                <tbody data-bind='foreach: expenseItemLines'>
-                                    <tr>
-                                        <td>
-                                            <p>
-                                                <select data-bind="options: expenseCategories, optionsText: 'name', optionsCaption: 'Select...', value: expenseCategory"></select>
-                                            </p>
-                                            <div data-bind="with: expenseCategory">
-                                                <p>Item</p>
-                                                <p>
-                                                    <select data-bind="options: expenseSubCategories, optionsText: 'name', optionsCaption: 'Select...', value: $parent.expenseSubCategory "></select>
-                                                </p>
-                                            </div>	<span><p>Cost</p><p><input  data-bind="value: expenseAmount" class="price form-control" /></p></span>
- <span><p>Period</p><p><select  data-bind="options: expensePeriods, optionsText: 'expensePeriodName', value: expensePeriod" ></select></p></span>
-
-                                            <div class="col-md-1">
+								</tr>
+								<tr>
+									<table width='100%' border="1" >
+										<thead>
+											<tr>
+												<div class="col-md-6">
+													<caption class='text-left'>
+														<h3>Expenses</h3>
+													</caption>
+												</div>
+											</tr>
+											<tr>
+												<div class="col-md-1">
+													<th>Expense Item</th>
+												</div>
+												<div class="col-md-1">
+													<th></th>
+												</div>
+												<div class="col-md-1">
+													<th class='text-right'>Weekly</th>
+												</div>
+											</tr>
+										</thead>
+										<tbody data-bind='foreach: expenseItemLines' >
+											<tr>
+												<td class='text-right vtop'>
+													<p >
+														Category
+														<select data-bind="options: expenseCategories, optionsText: 'name', optionsCaption: 'Select...', value: expenseCategory"></select>
+													</p>
+													<div data-bind="with: expenseCategory">
+														<p>
+															Item
+															<select data-bind="options: expenseSubCategories, optionsText: 'name', optionsCaption: 'Select...', value: $parent.expenseSubCategory "></select>
+														</p>
+													</div>
+												</td>
+												<td class='text-right'>
+													<span style='display:inline-block;'>Cost<input style='display:inline-block;' data-bind="value: expenseAmount" class="price form-control" />
+													Period<select  data-bind="options: expensePeriods, optionsText: 'expensePeriodName', value: expensePeriod" ></select></span>
+												</td>	
                                                 <td class='price	text-right vbottom' data-bind="text: formatCurrency(expenseSubtotal())"></td>
-                                            </div>
-                                            <td class='text-right vbottom'><a href='#' data-bind='click: removeExpenseLine'>Remove</a>
-                                            </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class='text-right'>
-                                    <button class='btn-custom btn' data-bind='click: addExpenseLine'>Add Expense</button>
-                                    <br/>
-                            </td>
-                            </div>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table width='30%' border="1">
-                                    <tbody>
-                                        <tr>
-                                             <h4 class='grandTotal text-right'>
-        Weekly Expenses: <span data-bind='text: formatCurrency(grandTotal())'></span>
-    </h4>
-                                            <br/>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </td>
-                        </tr>
-                        <div class="col-md-6 ">
-                            <tr>
-                                <div class="col-md-6 text-left">
-                                    <h3 class="text-left">Summary</h3>
-                                </div>
-                            </tr>
-                            <tr width='40%'>
-                                <table width='100%' border="1">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th class='text-right'>Gross</th>
-                                            <th class='text-right'>Net</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class='text-right'>Week</td>
-                                            <td class='price text-right'>
-                                                <label data-bind="text: formatCurrency(grossThisPeriod())"></label>
-                                            </td>
-                                            <td class='price text-right'>
-                                                <label data-bind="text: formatCurrency(netPerPeriod())"></label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class='text-right'>Year</td>
-                                            <td class='price text-right'>
-                                                <label data-bind="text: formatCurrency(grossPerYear())"></label>
-                                            </td>
-                                            <td class='price text-right'>
-                                                <label data-bind="text: formatCurrency(netPerYear())"></label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class='text-right'>Per Hour</td>
-                                            <td class='price text-right'>
-                                                <label data-bind="text: formatCurrency(grossPerHour())"></label>
-                                            </td>
-                                            <td class='price text-right'>
-                                                <label data-bind="text: formatCurrency(netPerHour())"></label>
-                                            </td>
-                                        </tr>
-                                    </tbody>
+												<td class='text-right vbottom'><a href='#' data-bind='click: removeExpenseLine'>Remove</a></td>
+											</tr>
+										</tbody>
+									</table>
+								</tr>
+								<tr>
+									<td>
+										<div class='text-right'>
+											<button class='btn-custom btn' data-bind='click: addExpenseLine'>Add Expense</button>
+											<br/>
+										</div>
+									</td>
+								</tr>
+								<tr>
+								</tr>
+								<tr width='40%'>
+									<table width='100%' border="1">
+										<thead>
+											<tr>
+												<div class="col-md-6">
+													<caption class='text-left'>
+														<h3>Summary</h3>
+													</caption>
+												</div>
+											</tr>										
+											<tr>
+												<th></th>
+												<th class='text-right'>Gross</th>
+												<th class='text-right'>Net</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class='text-right'>Week</td>
+												<td class='price text-right'>
+													<label data-bind="text: formatCurrency(grossThisPeriod())"></label>
+												</td>
+												<td class='price text-right'>
+													<label data-bind="text: formatCurrency(netPerPeriod())"></label>
+												</td>
+											</tr>
+											<tr>
+												<td class='text-right'>Year</td>
+												<td class='price text-right'>
+													<label data-bind="text: formatCurrency(grossPerYear())"></label>
+												</td>
+												<td class='price text-right'>
+													<label data-bind="text: formatCurrency(netPerYear())"></label>
+												</td>
+											</tr>
+											<tr>
+												<td class='text-right'>Per Hour</td>
+												<td class='price text-right'>
+													<label data-bind="text: formatCurrency(grossPerHour())"></label>
+												</td>
+												<td class='price text-right'>
+													<label data-bind="text: formatCurrency(netPerHour())"></label>
+												</td>
+											</tr>
+										</tbody>
                                 </table>
                             </tr>
-                        </div>
-                    </table>
-                    </fieldset>
+						</fieldset>
                     </form>
                 </div>
                 <div class="row">
@@ -452,7 +442,7 @@
                         <div id="chartYearlyTakeHome" style="width:100%; height:50%"></div>
                     </div>
                     <div class="col-xs-12 col-md-6">
-                        <div id="chartCategories" class="chartCategories" style="width:100%; height:100%"></div>
+                        <div id="chartCategories" class="chartCategories" style="width:100%; height:50%"></div>
                     </div>
                     <div class="col-xs-12 col-md-3">
                         <div id="chartHourlyWage" class="chartHourlyWage" style="width:100%; height:50%"></div>
