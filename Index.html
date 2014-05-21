@@ -19,10 +19,11 @@
         <style>
             .price {
                 min-width:25px;
-                max-width:175px;
+                max-width:40px;
             }
             .quantity {
-                min-width:15px;
+                min-width:25px;
+				max-width:60px;
             }
             .vbottom {
                 display: inline-block;
@@ -43,6 +44,9 @@
             a:visited {
                 color: #633100;
             }
+			select {
+				height:34px;
+			}
             div.lpxcenterpageinner {
                 position: relative;
                 margin: 0 auto;
@@ -157,7 +161,6 @@
 
 
 
-
             var hourlyPay = 0;
             var yearlyPayInThousands = 0;
             var totalExpenses = 0;
@@ -212,6 +215,7 @@
                     }] //Note: set to match page color scheme
                 };
                 var pieChart = new google.visualization.PieChart(document.getElementById('chartCategories'));
+				pieOptions.backgroundColor = $('.container').css('backgroundColor'); 
                 pieChart.draw(pieData, pieOptions);
             }
 
@@ -288,17 +292,15 @@
 					<form role="form">
                         <fieldset>
 							<table width='100%'>
+								<tr>
+									<div class="col-md-6">
+											<h3>Weekly Pay</h3>
+									</div>
+								</tr>
 								<tr width='60%'>
                                     <table width='100%' border="1">
                                         <thead>
-                                            <tr>
-                                                <div class="col-md-6">
-                                                    <caption class='text-left'>
-                                                        <h3>Weekly Pay</h3>
-                                                    </caption>
-                                                </div>
-                                            </tr>
-                                            <tr>
+                                           <tr>
                                                 <div class="col-md-1">
                                                     <th class='price'>Paid</th>
                                                 </div>
@@ -332,15 +334,13 @@
                                     </table>
 								</tr>
 								<tr>
-									<table width='100%' border="1" >
+									<div class="col-md-6">
+											<h3>Expenses</h3>
+									</div>
+								</tr>
+								<tr>
+									<table  width='100%' border="1" >
 										<thead>
-											<tr>
-												<div class="col-md-6">
-													<caption class='text-left'>
-														<h3>Expenses</h3>
-													</caption>
-												</div>
-											</tr>
 											<tr>
 												<div class="col-md-1">
 													<th>Expense Item</th>
@@ -355,21 +355,19 @@
 										</thead>
 										<tbody data-bind='foreach: expenseItemLines' >
 											<tr>
-												<td class='text-right vtop'>
-													<p >
-														Category
-														<select data-bind="options: expenseCategories, optionsText: 'name', optionsCaption: 'Select...', value: expenseCategory"></select>
-													</p>
-													<div data-bind="with: expenseCategory">
-														<p>
-															Item
+												<td class='text-left vtop'>
+													<span style='display:inline-block;' >Category<div></div>
+														<select  data-bind="options: expenseCategories, optionsText: 'name', optionsCaption: 'Select...', value: expenseCategory"></select>
+													</span>
+													<div style='display:inline-block;' data-bind="with: expenseCategory">
+														<span style='display:inline-block;' >Item<div></div>
 															<select data-bind="options: expenseSubCategories, optionsText: 'name', optionsCaption: 'Select...', value: $parent.expenseSubCategory "></select>
-														</p>
+														</span>
 													</div>
 												</td>
-												<td class='text-right vtop'>
-													<span style='display:inline-block;'>Cost<input style='display:inline-block;' data-bind="value: expenseAmount" class="price form-control" />
-													Period<select  data-bind="options: expensePeriods, optionsText: 'expensePeriodName', value: expensePeriod" ></select></span>
+												<td class='text-left vtop'>
+													<span style='display:inline-block;' >Cost<input style='display:inline-block;' data-bind="value: expenseAmount" class="form-control" /></span>
+													<span style='display:inline-block;' >Period<div></div><select  data-bind="options: expensePeriods, optionsText: 'expensePeriodName', value: expensePeriod" ></select></span>
 												</td>	
                                                 <td class='price	text-right vbottom' data-bind="text: formatCurrency(expenseSubtotal())"></td>
 												<td class='text-right vbottom'><a href='#' data-bind='click: removeExpenseLine'>Remove</a></td>
@@ -386,17 +384,30 @@
 									</td>
 								</tr>
 								<tr>
+								<tr>
+<td>
+		<table width='30%'>
+		<tbody>
+            <tr>
+    <h4 class='grandTotal text-right' >
+        Weekly Expenses: <span data-bind='text: formatCurrency(grandTotal())'></span>
+    </h4><br/>
+            </tr>
+		</tbody>
+		</table>
+
+</td>
+</tr>
+
+								</tr>
+								<tr>
+									<div class="col-md-6">
+											<h3>Summary</h3>
+									</div>
 								</tr>
 								<tr width='40%'>
 									<table width='100%' border="1">
-										<thead>
-											<tr>
-												<div class="col-md-6">
-													<caption class='text-left'>
-														<h3>Summary</h3>
-													</caption>
-												</div>
-											</tr>										
+										<thead>									
 											<tr>
 												<th></th>
 												<th class='text-right'>Gross</th>
