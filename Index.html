@@ -18,7 +18,7 @@
         <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.debug.js"></script>
         <style>
             .price {
-                min-width:25px;
+                min-width:35px;
                 max-width:40px;				
             }
             .quantity {
@@ -181,8 +181,8 @@ function drawCategoryChart() {
 	var pieData = google.visualization.arrayToDataTable(expenseCategoryChartData);
 	var pieOptions = {
 				backgroundColor: "#BE6527", //Note: set to match page css
-				// original chartArea: {left:"10%",top:"5%",  width:"70%",height:"25%"},  
-				chartArea: {left:"10%",top:"5%",  width:"70%",height:"40%"},  
+				// original chartArea: {left:"10%",top:"5%",  width:"70%",height:"25%"},  left:"10%",top:"5%",, right:"10%"
+				chartArea: {width:"90%",height:"100%"},  
 				legend: {position: 'left'},
                 slices: [ {color: '#168E10', offset: 0.2 },{color: '#C5161F'},{color: '#FFA500'},{color: '#499DDA'},{color: '#88108E'},{color: '#10558E'}] //Note: set to match page color scheme
             };
@@ -309,19 +309,7 @@ var options = {
 								</tr>
 								<tr>
 									<table  width='100%'  >
-										<thead>
-											<tr>
-												<div class="col-md-1">
-													<th>Expense Item</th>
-												</div>
-												<div class="col-md-1">
-													<th></th>
-												</div>
-												<div class="col-md-1">
-													<th class='text-right'>Weekly</th>
-												</div>
-											</tr>
-										</thead>
+
 										<tbody data-bind='foreach: expenseItemLines' >
 											<tr>
 												<td class='text-left vtop'>
@@ -338,11 +326,15 @@ var options = {
 													<span style='display:inline-block;' >Cost<input style='display:inline-block;' data-bind="value: expenseAmount" class="form-control" /></span>
 													<span style='display:inline-block;' >Period<div></div><select  data-bind="options: expensePeriods, optionsText: 'expensePeriodName', value: expensePeriod" ></select></span>
 												</td>	
-                                                <td class='price	text-right vbottom' data-bind="text: formatCurrency(expenseSubtotal())"></td>
-												<td class='text-right vbottom'><a href='#' data-bind='click: removeExpenseLine'>Remove</a></td>
+												<td class='text-left vtop'>
+													<br/>
+													<span style='display:inline-block;' ></span>
+													<span style='display:inline-block;'data-bind="text: formatCurrency(expenseSubtotal())" ></span>
+													<span style='display:inline-block; margin-left:5px;  ><a  href='#' data-bind='click: removeExpenseLine'>Remove</a></span>
+												</td>	
 											</tr>
 										</tbody>
-									</table>
+									</table><br/>
 								</tr>
 								<tr>
 									<td>
@@ -374,7 +366,7 @@ var options = {
 											<h3>Summary</h3>
 									</div>
 								</tr>
-								<tr width='40%'>
+								<tr >
 									<table width='100%' >
 										<thead>									
 											<tr>
@@ -419,13 +411,13 @@ var options = {
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-md-3">
-                        <div id="chartYearlyTakeHome" style="width:100%; height:50%"></div>
+                        <div id="chartYearlyTakeHome" style="width:80%; height:33%"></div>
                     </div>
                     <div class="col-xs-12 col-md-6">
-                        <div id="chartCategories" style="width:100%; height:50%"></div>
+                        <div id="chartCategories" style="width:100%; height:40% "></div>
                     </div>
                     <div class="col-xs-12 col-md-3">
-                        <div id="chartHourlyWage" class="chartHourlyWage" style="width:100%; height:50%"></div>
+                        <div id="chartHourlyWage" class="chartHourlyWage" style="width:80%; height:33%"></div>
                     </div>
                 </div>
             </div>
