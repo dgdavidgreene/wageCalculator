@@ -203,7 +203,7 @@ function drawHourlyWageChart () {
 	if (hourlyPay > 0) {
 		hourlyPay = roundToTwo(hourlyPay);
 	}
-	
+
     var data = google.visualization.arrayToDataTable([
         ['Label', 'Value'],
         ['Hour', hourlyPay]
@@ -267,41 +267,44 @@ var options = {
 							<table width='100%'>
 								<tr>
 									<div class="col-md-6">
-											<h3>Weekly Pay</h3>
+											<td><h3>Weekly Pay</h3></td>
 									</div>
 								</tr>
 								<tr width='60%'>
-                                    <table width='100%' >
-                                        <thead>
-                                           <tr>
-                                                <th class='price'><span style='margin-left:10px;'>Paid</span></th>
+                                    <td>
+										<table width='100%' >
+											<thead>
+												<tr>
+													<th class='price'><span style='margin-left:10px;'>Paid</span></th>
                                                     <th class='quantity'><span style='margin-left:20px;'>Hours</span></th>
                                                     <th class='price text-right'>Per Hour</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
                                                     <td class='price'>
-                                                        <input data-bind="value: amountPaid" class="form-control"  />
+                                                        <input data-bind="value: amountPaid" class="form-control" style='min-width:80px; max-width:100px;' />
                                                     </td>
                                                     <td class='quantity'>
-                                                        <input data-bind="value: hoursWorked" class="form-control" style='margin-left:10px;' />
+                                                        <input data-bind="value: hoursWorked" class="form-control" style='margin-left:10px; min-width:80px; max-width:100px;' />
                                                     </td>
                                                     <td class='price text-right'>
                                                         <label data-bind="text: formatCurrency(grossPerHour())"></label>
                                                     </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+												</tr>
+											</tbody>
+										</table>
+									</td>
 								</tr>
 								<tr>
 									<div class="col-md-6">
-											<h3>Expenses</h3>
+											<td>
+												<h3>Expenses</h3>
+											</td>
 									</div>
 								</tr>
 								<tr>
 									<table  width='100%'  >
-
 										<tbody data-bind='foreach: expenseItemLines' >
 											<tr>
 												<td class='text-left vtop'>
@@ -315,7 +318,7 @@ var options = {
 													</div>
 												</td>
 												<td class='text-left vtop'>
-													<span style='display:inline-block; margin-left:5px;' ><span style='margin-left:10px;'>Cost</span><input style='display:inline-block;' data-bind="value: expenseAmount" class="form-control" /></span>
+													<span style='display:inline-block; margin-left:5px;' ><span style='margin-left:10px; min-width:80px; max-width:100px;'>Cost</span><div></div><input style='display:inline-block; min-width:80px; max-width:100px;' data-bind="value: expenseAmount" class="form-control" /></span>
 													<span style='display:inline-block;margin-left:5px;' ><span style='margin-left:10px;'>Period</span><div></div><select  data-bind="options: expensePeriods, optionsText: 'expensePeriodName', value: expensePeriod" ></select></span>
 												</td>	
 												<td class='text-left vtop'>
@@ -341,9 +344,11 @@ var options = {
 										<table width='30%'>
 											<tbody>
             									<tr>
-													<h4 class='grandTotal text-right' >
-														Weekly Expenses: <span data-bind='text: formatCurrency(grandTotal())'></span>
-													</h4>
+													<td>
+														<h4 class='grandTotal text-right' >
+															Weekly Expenses: <span data-bind='text: formatCurrency(grandTotal())'></span>
+														</h4>
+													</td>
 													<br/>
             									</tr>
 											</tbody>
@@ -352,49 +357,54 @@ var options = {
 								</tr>
 								<tr>
 									<div class="col-md-6">
+										<td>
 											<h3>Summary</h3>
+										</td>	
 									</div>
 								</tr>
 								<tr >
-									<table width='100%' >
-										<thead>									
-											<tr>
-												<th></th>
-												<th class='text-right'>Gross</th>
-												<th class='text-right'>Net</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td class='text-right'>Week</td>
-												<td class='price text-right'>
-													<label data-bind="text: formatCurrency(grossThisPeriod())"></label>
-												</td>
-												<td class='price text-right'>
-													<label data-bind="text: formatCurrency(netPerPeriod())"></label>
-												</td>
-											</tr>
-											<tr>
-												<td class='text-right'>Year</td>
-												<td class='price text-right'>
-													<label data-bind="text: formatCurrency(grossPerYear())"></label>
-												</td>
-												<td class='price text-right'>
-													<label data-bind="text: formatCurrency(netPerYear())"></label>
-												</td>
-											</tr>
-											<tr>
-												<td class='text-right'>Per Hour</td>
-												<td class='price text-right'>
-													<label data-bind="text: formatCurrency(grossPerHour())"></label>
-												</td>
-												<td class='price text-right'>
-													<label data-bind="text: formatCurrency(netPerHour())"></label>
-												</td>
-											</tr>
-										</tbody>
-                                </table>
-                            </tr>
+									<td>
+										<table width='100%' >
+											<thead>									
+												<tr>
+													<th></th>
+													<th class='text-right'>Gross</th>
+													<th class='text-right'>Net</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td class='text-right'>Week</td>
+													<td class='price text-right'>
+														<label data-bind="text: formatCurrency(grossThisPeriod())"></label>
+													</td>
+													<td class='price text-right'>
+														<label data-bind="text: formatCurrency(netPerPeriod())"></label>
+													</td>
+												</tr>
+												<tr>
+													<td class='text-right'>Year</td>
+													<td class='price text-right'>
+														<label data-bind="text: formatCurrency(grossPerYear())"></label>
+													</td>
+													<td class='price text-right'>
+														<label data-bind="text: formatCurrency(netPerYear())"></label>
+													</td>
+												</tr>
+												<tr>
+													<td class='text-right'>Per Hour</td>
+													<td class='price text-right'>
+														<label data-bind="text: formatCurrency(grossPerHour())"></label>
+													</td>
+													<td class='price text-right'>
+														<label data-bind="text: formatCurrency(netPerHour())"></label>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</table>
 						</fieldset>
                     </form>
                 </div>
@@ -567,8 +577,8 @@ var options = {
             function formatCurrency(value) {
                 return "$" + value.toFixed(2);
             }
-			
-			
+
+
             function redrawCharts() {
                 drawCategoryChart();
                 drawHourlyWageChart();
