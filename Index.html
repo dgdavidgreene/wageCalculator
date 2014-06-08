@@ -266,9 +266,7 @@ var options = {
                         <fieldset>
 							<table width='100%'>
 								<tr>
-									<div class="col-md-6">
-											<td><h3>Weekly Pay</h3></td>
-									</div>
+									<td><h3>Weekly Pay</h3></td>
 								</tr>
 								<tr >
                                     <td>
@@ -297,33 +295,39 @@ var options = {
 									</td>
 								</tr>
 								<tr>
-									<div >
-											<td>
-												<h3>Expenses</h3>
-											</td>
-									</div>
+									<td>
+										<h3>Expenses</h3>
+									</td>
 								</tr>
 								<tr>
 									<td>
-										<table    >
+										<table >
 											<tbody data-bind='foreach: expenseItemLines' >
-												<tr  >
-													<td class='text-left vtop' style='display:inline-block;'>
-														<span style='display:inline-block; padding-left:6px;' ><span style='margin-left:10px;'>Category</span><div></div>
+												<tr style='border-bottom: solid #BE6527 10px;' >
+													<td class='text-left vtop' style='display:inline-block; '>
+														<span style='display:inline-block; padding-left:6px; padding-bottom:5px;' ><span style='margin-left:10px;'>Category</span><div></div>
 															<select  data-bind="options: expenseCategories, optionsText: 'name', optionsCaption: 'Select...', value: expenseCategory"></select>
 														</span>
-														<div style='display:inline-block;' data-bind="with: expenseCategory">
+														<div style='display:inline-block; padding-left:6px; padding-bottom:5px;' data-bind="with: expenseCategory">
 															<span style='display:inline-block;' ><span style='margin-left:10px;'>Item</span><div></div>
 																<select data-bind="options: expenseSubCategories, optionsText: 'name', optionsCaption: 'Select...', value: $parent.expenseSubCategory "></select>
 															</span>
 														</div>
 													</td>
 													<td class='text-left vtop'>
-														<span style='display:inline-block; margin-left:5px; ' ><span style='margin-left:10px; min-width:80px; max-width:100px;'>Cost</span><div></div><input style='display:inline-block; min-width:80px; max-width:100px;' data-bind="value: expenseAmount" class="form-control" /></span>
-														<span style='display:inline-block;margin-left:5px; ' class='text-left vtop' ><span style='margin-left:10px; margin-bottom:6px;' >Period</span><div></div><select data-bind="options: expensePeriods, optionsText: 'expensePeriodName', value: expensePeriod" ></select></span>
+														<span style='display:inline-block; margin-left:5px; padding-bottom:5px;' >
+															<span style='margin-left:10px; min-width:80px; max-width:100px;'>Cost</span>
+															<div></div>
+															<input style='display:inline-block; min-width:80px; max-width:100px;' data-bind="value: expenseAmount" class="form-control" />
+														</span>
+														<span style='display:inline-block; margin-left:5px; padding-bottom:5px;' class='text-left vtop' >
+															<span style='margin-left:10px; margin-bottom:6px;' >Period</span>
+															<div></div>
+															<select data-bind="options: expensePeriods, optionsText: 'expensePeriodName', value: expensePeriod" ></select>
+														</span>
 													</td>	
-													<td  class='text-left vtop' style=' margin-left:10px; >
-														<span style='display:inline-block;' class='text-right' >
+													<td  class='text-left vtop' style=' margin-left:10px;' >
+														<span style='display:inline-block;' class='text-right padding-bottom:5px;' >
 															<span  style='display:inline-block; margin-left:5px;' data-bind="text: formatCurrency(expenseSubtotal())" ></span>
 															<div style="height: 10px;" ></div>
 															<span style='display:inline-block; margin-left:5px;'  ><a  href='#' data-bind='click: removeExpenseLine'>Remove</a></span>
@@ -344,10 +348,10 @@ var options = {
             									<tr>
 													<td>
 														<h4 class='grandTotal text-right' >
-															<span data-bind='text: formatCurrency(grandTotal())'></span> Weekly
+															<span style='display:inline-block; margin-left:5px;' data-bind='text: formatCurrency(grandTotal())'></span> Weekly
 														</h4>
 													</td>
-													<td width=30px; >
+													<td width=40px; >
 													</td>
 													<td>
 														<div class='text-right'>
