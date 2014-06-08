@@ -270,23 +270,22 @@ var options = {
 								</tr>
 								<tr >
                                     <td>
-										<table width='100%'  >
-											<thead>
-												<tr>
-													<th class='price' ><span style='margin-left:10px; '>Paid</span></th>
-                                                    <th class='quantity' ><span style='margin-left:20px; '>Hours</span></th>
-                                                    <th class='price text-right' >Per Hour</th>
-												</tr>
-											</thead>
+										<table   >
 											<tbody>
 												<tr>
-                                                    <td class='price' >
-                                                        <input data-bind="value: amountPaid" class="form-control" style='min-width:80px; max-width:100px; ' />
+                                                    <td class='price' width='35%' >
+														<span style='margin-left:15px; '>Paid</span>
+														<div></div>
+                                                        <input data-bind="value: amountPaid" class="form-control" style='min-width:80px; max-width:100px;  margin-left:5px;' />
                                                     </td>
-                                                    <td class='quantity'>
-                                                        <input data-bind="value: hoursWorked" class="form-control" style='margin-left:10px; min-width:80px; max-width:100px; ' />
+                                                    <td class='quantity'  width='20%' >
+														<span style='margin-left:20px; '>Hours</span>
+														<div></div>
+                                                        <input data-bind="value: hoursWorked" class="form-control" style='margin-left:10px; min-width:60px; max-width:60px; ' />
                                                     </td>
-                                                    <td class='price text-right'>
+                                                    <td class='price text-right' width='35%'  >
+														<span style='margin-left:20px;' >Per Hour</span>
+														<div></div>
                                                         <label data-bind="text: formatCurrency(grossPerHour())"></label>
                                                     </td>
 												</tr>
@@ -336,10 +335,8 @@ var options = {
 												</tr>
 											</tbody>
 										</table>
-										<br/>
+
 									</td>
-								</tr>
-								<tr>
 								</tr>
 								<tr>
 									<td>
@@ -351,7 +348,7 @@ var options = {
 															<span style='display:inline-block; margin-left:5px;' data-bind='text: formatCurrency(grandTotal())'></span> Weekly
 														</h4>
 													</td>
-													<td width=40px; >
+													<td width=60px; >
 													</td>
 													<td>
 														<div class='text-right'>
@@ -373,12 +370,12 @@ var options = {
 								</tr>
 								<tr >
 									<td>
-										<table  width='100%;' >
+										<table   >
 											<thead>									
 												<tr>
-													<th class='text-right' width='33%;'></th>
-													<th class='text-right' width='33%;'>Gross</th>
-													<th class='text-right' width='33%;'>Net</th>
+													<th class='text-right' width='25%'></th>
+													<th class='text-right' width='35%'>Gross</th>
+													<th class='text-right' width='40%'>Net</th>
 												</tr>
 											</thead>
 											<tbody>
