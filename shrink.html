@@ -21,11 +21,9 @@
 			.form-control {	
 				padding-top:0px;
 				padding-bottom:0px;
-				padding-left:6px;
-				padding-right:6px;
 				border:0px;
-				height:20px;
-				font-size:12px;
+				height:22px;
+				font-size:16px;
 			}
             .price {
                 min-width:35px;
@@ -56,9 +54,7 @@
                 color: #633100;
             }
 			select {
-				border:0px;
-				height:20px;
-				font-size:12px;
+				border:1px;
 			}
             div.lpxcenterpageinner {
                 position: relative;
@@ -286,18 +282,18 @@ var options = {
 											<table   >
 												<tbody>
 													<tr>
-														<td class='price' width='35%'>
+														<td class='price' width='35%' >
 															<span style='margin-left:15px; '>Paid</span>
 															<div></div>
-															<input data-bind="value: amountPaid" class="form-control" style='min-width:70px; max-width:70px;  margin-left:5px;' />
+															<input data-bind="value: amountPaid" class="form-control" style='min-width:80px; max-width:100px;  margin-left:5px;' />
 														</td>
 														<td class='quantity'  width='20%' >
-															<span style='margin-left:5px; '>Hours</span>
+															<span style='margin-left:1px; '>Hours</span>
 															<div></div>
-															<input data-bind="value: hoursWorked" class="form-control" style='margin-left:0px; min-width:40px; max-width:50px; ' />
+															<input data-bind="value: hoursWorked" class="form-control" style='margin-left:5px; min-width:60px; max-width:60px; ' />
 														</td>
 														<td class='price text-right' width='35%'  >
-															<span style='margin-left:15px;' >Per Hour</span>
+															<span style='margin-left:20px;' >Per Hour</span>
 															<div></div>
 															<label data-bind="text: formatCurrency(grossPerHour())"></label>
 														</td>
@@ -316,32 +312,32 @@ var options = {
 											<table >
 												<tbody data-bind='foreach: expenseItemLines' >
 													<tr style='border-bottom: solid #BE6527 10px;' >
-														<td class='text-left vtop' style='display:inline-block; margin-left:5px;'>
-															<span style='display:inline-block; padding-left:6px; padding-bottom:5px;' ><span style='margin-left:5px;'>Category</span><div></div>
+														<td class='text-left vtop' style='display:inline-block; '>
+															<span style='display:inline-block; padding-left:6px; padding-bottom:5px;' ><span style='margin-left:10px;'>Category</span><div></div>
 															<select  data-bind="options: expenseCategories, optionsText: 'name', optionsCaption: 'Select...', value: expenseCategory"></select>
 															</span>
 															<div style='display:inline-block; padding-left:6px; padding-bottom:5px;' data-bind="with: expenseCategory">
-																<span style='display:inline-block;' ><span style='margin-left:5px;'>Item</span><div></div>
+																<span style='display:inline-block;' ><span style='margin-left:10px;'>Item</span><div></div>
 																	<select data-bind="options: expenseSubCategories, optionsText: 'name', optionsCaption: 'Select...', value: $parent.expenseSubCategory "></select>
 																</span>
 															</div>
 														</td>
 														<td class='text-left vtop'>
 															<span style='display:inline-block; margin-left:10px; padding-bottom:5px;' >
-																<span style='margin-left:5px; min-width:80px; max-width:100px;'>Cost</span>
+																<span style='margin-left:10px; min-width:80px; max-width:100px;'>Cost</span>
 																<div></div>
-																<input style='display:inline-block; min-width:70px; max-width:90px;' data-bind="value: expenseAmount" class="form-control" />
+																<input style='display:inline-block; min-width:80px; max-width:100px;' data-bind="value: expenseAmount" class="form-control" />
 															</span>
 															<span style='display:inline-block; margin-left:10px; padding-bottom:5px;' class='text-left vtop' >
 																<span style='margin-left:10px; margin-bottom:6px;' >Period</span>
 																<div></div>
 																<select data-bind="options: expensePeriods, optionsText: 'expensePeriodName', value: expensePeriod" ></select>
 															</span>
-														</td>	
-														<td  class='text-right vtop' style=' margin-left:10px; display: block; float: right;' >
+														</td>		
+														<td  class='text-left vtop' style=' margin-left:10px;' >
 															<span style='display:inline-block;' class='text-right padding-bottom:5px;' >
 																<span  style='display:inline-block; margin-left:5px;' data-bind="text: formatCurrency(expenseSubtotal())" ></span>
-																<div style="height:0px;" ></div>
+																<div style="height:5px;" ></div>
 																<span style='display:inline-block; margin-left:5px;'  ><a  href='#' data-bind='click: removeExpenseLine'>Remove</a></span>
 															</span>
 														</td>		
@@ -425,12 +421,12 @@ var options = {
 								</table>
 							</fieldset>
 						</form>
-						<div class="row" >
+						<div class="row">
 							<div class="col-xs-12 col-md-6">
-								<div id="chartYearlyTakeHome" class='chartYearlyWage' style="width:200px; height:200px;"></div>
+								<div id="chartYearlyTakeHome" class='chartYearlyWage' style="width:100%; height:50%"></div>
 							</div>
 							<div class="col-xs-12 col-md-6">
-								<div id="chartHourlyWage" class="chartHourlyWage" style="width:200px; height:200px;"></div>
+								<div id="chartHourlyWage" class="chartHourlyWage" style="width:100%; height:50%"></div>
 							</div>
 						</div>
 					</div>
