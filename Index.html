@@ -315,7 +315,7 @@ var options = {
 										<td>
 											<table >
 												<tbody data-bind='foreach: expenseItemLines' >
-													<tr style='border-bottom: solid #BE6527 10px;' >
+													<tr style='border-bottom: solid #BE6527 10px; ' >
 														<td class='text-left vtop' style='display:inline-block; margin-left:5px;'>
 															<span style='display:inline-block; padding-left:6px; padding-bottom:5px;' ><span style='margin-left:5px;'>Category</span><div></div>
 															<select  data-bind="options: expenseCategories, optionsText: 'name', optionsCaption: 'Select...', value: expenseCategory"></select>
@@ -338,7 +338,7 @@ var options = {
 																<select data-bind="options: expensePeriods, optionsText: 'expensePeriodName', value: expensePeriod" ></select>
 															</span>
 														</td>	
-														<td  class='text-right vtop' style=' margin-left:10px; display: block; float: right;' >
+														<td  class='text-right vtop' style=' margin-left:10px; float: right;' >
 															<span style='display:inline-block;' class='text-right padding-bottom:5px;' >
 																<span  style='display:inline-block; margin-left:5px;' data-bind="text: formatCurrency(expenseSubtotal())" ></span>
 																<div style="height:0px;" ></div>
